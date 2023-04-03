@@ -150,30 +150,6 @@ exit(-1);
 };
 }
 
-// Главная функция писателя
-void writer_main() {
-printf("Writer started\n");
-
-// Запись данных в буфер
-for (int i = 0; i < NUM_WRITES; i++) {
-char data[MAX_STRING_SIZE];
-sprintf(data, "Message %d", i+1);
-write_buffer(data);
-printf("Writer wrote: %s\n", data);
-usleep(WRITE_DELAY);
-}
-
-printf("Writer finished\n");
-
-// закрытие общих семафоров
-close_common_semaphores();
-
-// завершение процесса
-exit(0);
-}
-
-
-
 // Функция, удаляющая все семафоры и разделяемую память
 void unlink_all(void) {
   if(sem_unlink(mutex_sem_name) == -1) {
